@@ -19,5 +19,12 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^3.0.2",
     "eslint-plugin-react": "^6.9.0"
-  }
+  },
+  "keywords": ["nyan", "nyancat", "cat", "progress", "loader"],
+  "homepage": "https://github.com/kevin940726/nyan-progress",
+  "bugs": "https://github.com/kevin940726/nyan-progress/issues",
+  "repository": {
+    "type" : "git",
+    "url" : "kevin940726/nyan-progress"
+  }  
 }
