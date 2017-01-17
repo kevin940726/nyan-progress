@@ -2,11 +2,12 @@
   "name": "nyan-progress",
   "version": "0.0.1",
   "description": "Nayn cat progress bar for the progress package.",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "author": "Kai Hao",
   "license": "MIT",
   "scripts": {
-    "start": "babel-node src/index.js"
+    "start": "babel-node src/index.js",
+    "build": "babel src --out-dir dist --source-maps"
   },
   "dependencies": {},
   "devDependencies": {

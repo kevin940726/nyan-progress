@@ -92,24 +92,32 @@ function NyanProgress() {
         readline.cursorTo(stream, 0, 0);
       }
 
+      const cat = nyan.frames[tick % nyan.frames.length].split('\n');
+      const paint = this.draw(cat, this.message.downloading);
+
+      stream.write(`${paint.join('\n')}\n`);
+
+      tick += 1;
+    },
+
+    draw(cat, messages) {
       const portion = this.curr / this.total;
-      const percent = Math.floor(portion * 100).toString();
+      const percent = Math.floor(portion * 100 > 100 ? 100 : portion * 100).toString();
       const len = Math.floor(portion * this.width);
       const flag = tick % nyan.frames.length;
-      const cat = nyan.frames[flag].split('\n');
       const rainbow = this.rainbow.map(line => line.substring(flag, flag + len));
-      this.paint = appendVertical(
+
+      const paint = appendVertical(
         [' ', ' ', ' ', ' '],
         applyColors(rainbow),
         cat,
       );
-      const message = this.message.downloading[tick % this.message.downloading.length];
-      const bar = `[${'='.repeat(len)}${' '.repeat(this.width - len)}] ${percent}% ${message}\n`;
-      this.paint.push(bar);
 
-      stream.write(this.paint.join('\n'));
+      const message = Array.isArray(messages) ? messages[tick % messages.length] : messages;
+      const bar = `[${'='.repeat(len)}${' '.repeat(this.width - len)}] ${percent}% ${message}`;
+      paint.push(bar);
 
-      tick += 1;
+      return paint;
     },
 
     tick() {
@@ -128,21 +136,15 @@ function NyanProgress() {
       readline.cursorTo(stream, 0, 0);
 
       const isFinished = this.curr >= this.total;
-      const portion = this.curr / this.total;
-      const percent = Math.floor(portion * 100 > 100 ? 100 : portion * 100).toString();
-      const len = Math.floor(portion * this.width);
-      const rainbow = this.rainbow.map(line => line.substring(0, len));
+      const cat = nyan[isFinished ? 'complete' : 'error'].split('\n');
+      const message = isFinished ? this.message.finished : this.message.error;
+      const paint = this.draw(cat, message);
 
-      this.paint = appendVertical(
-        [' ', ' ', ' ', ' '],
-        applyColors(rainbow),
-        nyan[isFinished ? 'complete' : 'error'].split('\n'),
-      );
+      if (isFinished) {
+        paint[paint.length - 1] += ` in ${timeElappsed}s.\n`;
+      }
 
-      const bar = `[${'='.repeat(len)}${' '.repeat(this.width - len)}] ${percent}% ${isFinished ? this.message.finished : this.message.error}${isFinished ? ` in ${timeElappsed}s.` : ''}\n`;
-      this.paint.push(bar);
-      stream.write(this.paint.join('\n'));
-      stream.write('\n');
+      stream.write(`${paint.join('\n')}\n`);
       stream.close();
 
       this.isComplete = true;
