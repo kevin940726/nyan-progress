@@ -156,14 +156,4 @@ function NyanProgress() {
   };
 }
 
-const progress = NyanProgress();
-progress.start({ total: 100 });
-const timer = setInterval(() => {
-  progress.tick();
-
-  if (progress.isComplete) {
-    clearInterval(timer);
-  }
-}, 100);
-
 export default NyanProgress;
