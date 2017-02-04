@@ -1,7 +1,8 @@
 # nyan-progress
 A nyan cat progress bar for Node.
-
 [![npm version](https://badge.fury.io/js/nyan-progress.svg)](https://badge.fury.io/js/nyan-progress)
+
+[![NPM](https://nodei.co/npm/nyan-progress.png?downloads=true&stars=true)](https://nodei.co/npm/nyan-progress/)
 
 ![screenshot](./assets/screenshot.gif)
 
