@@ -18,10 +18,12 @@ npm install --save nyan-progress
 
 ## Usage
 ```js
-import NyanProgress from 'nyan-progress';
+import nyanProgress from 'nyan-progress';
+// OR
+// const nyanProgress = require('nyan-progress);
 
-const progress = NyanProgress();
-progress.start({ total: 100 });
+const progress = nyanProgress(); // initialize
+progress.start({ total: 100 }); // start the progress
 
 const timer = setInterval(() => {
   progress.tick();
@@ -61,8 +63,8 @@ progress.start().then(callback);
 ##### `start(options, callback?)`
 The function to nyan the cat.
 
-##### `tick()`
-The function that increment `curr` by 1. When `curr` reached to `total`, the progress will stop.
+##### `tick(value? = 1)`
+The function that increment `curr` by `value`, `value` is default to 1 if not specified. When `curr` reached to `total`, the progress will stop.
 
 ##### `interupt()`
 For whatever reason you want to interupt the nyaning, call it. Note that it would not throw any error but display error message in the progress itself.

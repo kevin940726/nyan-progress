@@ -1,7 +1,7 @@
 import readline from 'readline';
 import applyColors from './colors';
 
-function NyanProgress() {
+function nyanProgress() {
   const stream = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
@@ -156,5 +156,5 @@ function NyanProgress() {
   };
 }
 
-export default NyanProgress;
-module.exports = NyanProgress;
+export default nyanProgress;
+module.exports = nyanProgress;
