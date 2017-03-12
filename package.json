@@ -1,6 +1,6 @@
 {
   "name": "nyan-progress",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Nyan cat progress bar because why not?",
   "main": "dist/index.js",
   "author": "Kai Hao",
