@@ -103,7 +103,7 @@ function NyanProgress() {
     draw(cat, messages) {
       const portion = this.curr / this.total;
       const percent = Math.floor(portion * 100 > 100 ? 100 : portion * 100).toString();
-      const len = Math.floor(portion * this.width);
+      const len = Math.floor((portion > 1 ? 1 : portion) * this.width);
       const flag = tick % nyan.frames.length;
       const rainbow = this.rainbow.map(line => line.substring(flag, flag + len));
 
@@ -120,8 +120,8 @@ function NyanProgress() {
       return paint;
     },
 
-    tick() {
-      this.curr += 1;
+    tick(value = 1) {
+      this.curr += value;
 
       return this;
     },
@@ -157,3 +157,4 @@ function NyanProgress() {
 }
 
 export default NyanProgress;
+module.exports = NyanProgress;
